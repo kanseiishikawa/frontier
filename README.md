@@ -2,8 +2,10 @@
 特徴量の有効性を自動で検出する
 
 ## コマンド
-```cd src/   
-go run main.go -target=target.json -fevalue=fevalue.js```
+```
+cd src/   
+go run main.go -target=target.json -fevalue=fevalue.js
+```
 
 ## コマンドオプション
 ### -target
