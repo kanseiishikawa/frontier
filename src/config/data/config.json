@@ -1,0 +1,30 @@
+{
+    "Two": [
+        {
+            "Name": "add",
+            "Use": true
+        },
+        {
+            "Name": "mul",
+            "Use": true
+        },
+        {
+            "Name": "diff",
+            "Use": true
+        },        
+        {
+            "Name": "mean",
+            "Use": true
+        }
+    ],
+    "Three":[
+        {
+            "Name": "mean",
+            "Use": true
+        },
+        {
+            "Name": "std",
+            "Use": true
+        }
+    ]
+}
