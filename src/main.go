@@ -13,7 +13,7 @@ func main() {
 	t := flag.String( "target", "target.json", "target json file" )	
 	f := flag.String( "fevalue", "fevalue.json", "fevalue json file" )
 	flag.Parse()
-
+	
 	//設定ファイルの読み込み
 	confData, err := config.ConfigRead()
 
@@ -39,7 +39,6 @@ func main() {
 	}
 	
 	feValueN := len( feValue.Info )	
-	//targetN := len( target.Info )
 
 	//bit全探索で全てのパターンを網羅
 	BitSearchList := analyze.BitSearch( feValueN )
@@ -80,6 +79,9 @@ func main() {
 		}
 	}
 
+	//結果を作成するディレクトリを作成する
+	os.Mkdir( "score_results", 0777 )
+	
 	for _, score := range scores {
 		err = analyze.DataWrite( score )
 		if err != nil {
