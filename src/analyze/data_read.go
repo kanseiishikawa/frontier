@@ -1,6 +1,7 @@
 package analyze
 
 import (
+	"errors"
 	"io/ioutil"
 	"encoding/json"
 )
@@ -39,6 +40,11 @@ func TargetRead( file_name string ) ( Target, error ){
 		return target, err
 	}
 
+	if len( target.Info ) != len( target.Value[0] ) {
+		err = errors.New( "target not match value info" )
+		return target, err
+	}
+	
 	return target, nil
 }
 
@@ -57,6 +63,11 @@ func FeValueRead( file_name string ) ( FeValue, error ){
 		return fevalue, err
 	}
 
+	if len( fevalue.Info ) != len( fevalue.Value[0] ) {
+		err = errors.New( "fevalue not match value info" )
+		return fevalue, err
+	}
+	
 	return fevalue, nil
 }
 

@@ -7,7 +7,7 @@ type ScoreData struct {
 	FeValueName string
 }
 
-func AnalyzeScore( targets []AnalyzeData, feValue AnalyzeData, res chan []ScoreData ) {
+func AnalyzeScore( targets []AnalyzeData, feValue *AnalyzeData, res chan []ScoreData ) {
 	var result []ScoreData
 	
 	for _, target := range targets {

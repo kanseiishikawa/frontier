@@ -28,9 +28,9 @@ func BitSearch( N int ) ( [][]int ) {
 	return result
 }
 
-func TargetDataCreate( target Target ) ( []AnalyzeData ) {
+func TargetDataCreate( target *Target ) ( []AnalyzeData ) {
 	var result []AnalyzeData
-	
+
 	for i := 0; i < len( target.Info ); i++ {		
 		var instance AnalyzeData
 		instance.Name = target.Info[i].Name
@@ -45,7 +45,7 @@ func TargetDataCreate( target Target ) ( []AnalyzeData ) {
 	return result
 }
 
-func ValueDataCreate( feValue FeValue, bit []int, confData config.ConfData, re chan []AnalyzeData ) {
+func ValueDataCreate( feValue *FeValue, bit []int, confData *config.ConfData, re chan []AnalyzeData ) {
 	check := map[string][]float32{}
 	n := len( bit )
 	name := " "
@@ -67,12 +67,12 @@ func ValueDataCreate( feValue FeValue, bit []int, confData config.ConfData, re c
 	
 	for i := 0; i < len( feValue.Value ); i++ {
 		var instance []float32
-		
+		//fmt.Println( feValue.Value[i], bit )
 		for _, b := range bit {
 			instance = append( instance, feValue.Value[i][b] )
 		}
 
-		if n == 1 {			
+		if n == 1 {
 			check[valueName] = append( check[valueName], instance[0] )
 		} else {
 			paramList := confData.Three
