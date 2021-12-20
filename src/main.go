@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"os"
 
+	"frontier/file"
 	"frontier/config"
-	"frontier/analyze"
+	"frontier/analyze"	
 )
 
 func main() {
@@ -24,7 +25,7 @@ func main() {
 	}
 
 	//targetの読み込み
-	target, err := analyze.TargetRead( *t )
+	target, err := file.TargetRead( *t )
 	fmt.Println( "target read finish" )
 
 	if err != nil {
@@ -33,7 +34,7 @@ func main() {
 	}
 
 	//特徴量の読み込み
-	feValue, err := analyze.FeValueRead( *f )
+	feValue, err := file.FeValueRead( *f )
 	fmt.Println( "fevalue read finish" )
 	
 	if err != nil {
@@ -88,14 +89,14 @@ func main() {
 	os.Mkdir( "score_results", 0777 )
 	
 	for _, score := range scores {
-		err = analyze.RDataWrite( score )
+		err = file.RDataWrite( score )
 		
 		if err != nil {
 			fmt.Println( err )
 			os.Exit( 1 )
 		}
 
-		err = analyze.DiffDataWrite( score )
+		err = file.DiffDataWrite( score )
 		
 		if err != nil {
 			fmt.Println( err )

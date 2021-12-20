@@ -4,11 +4,16 @@ import (
 	"math"
 )
 
+type Diff struct {
+	Score float32
+	Ave float32
+	A float32
+	B float32
+}
+
 type ScoreData struct {
 	RScore float32
-	DiffScore float32
-	DiffA float32
-	DiffB float32
+	Diff Diff
 	TargetName string
 	FeValueName string
 }
@@ -37,18 +42,22 @@ func leastSquare( xList []float32, yList []float32 ) ( float32, float32 ) {
 	return a, b
 }
 
-func diffScore( xList []float32, yList []float32, a float32, b float32 ) ( float32 ) {
+func diffScore( xList []float32, yList []float32, a float32, b float32 ) ( float32, float32 ) {
 	var diff float32
+	var ave float32
 	diff = 0
+	ave = 0
 	
 	for i := 0; i < len( xList ); i++ {
 		predictTarget := a * xList[i] + b
 		diff += float32( math.Abs( float64( yList[i] - predictTarget ) ) )
+		ave += predictTarget
 	}
 
 	diff /= float32( len( xList ) )
+	ave /= float32( len( xList ) )
 	
-	return diff
+	return diff, ave
 }
 
 func AnalyzeScore( targets []AnalyzeData, feValue *AnalyzeData, res chan []ScoreData ) {
@@ -60,9 +69,9 @@ func AnalyzeScore( targets []AnalyzeData, feValue *AnalyzeData, res chan []Score
 		instance.FeValueName = feValue.Name
 		instance.RScore = correlationCoefficient( target.Data, feValue.Data )
 		a, b := leastSquare( feValue.Data, target.Data )
-		instance.DiffScore = diffScore( feValue.Data, target.Data, a, b )
-		instance.DiffA = a
-		instance.DiffB = b
+		instance.Diff.Score, instance.Diff.Ave = diffScore( feValue.Data, target.Data, a, b )
+		instance.Diff.A = a
+		instance.Diff.B = b
 		result = append( result, instance )
 	}
 

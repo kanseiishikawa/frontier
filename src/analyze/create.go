@@ -4,6 +4,25 @@ import (
 	"frontier/config"
 )
 
+type TargetInfo struct {
+	Name string
+	Up   bool
+}
+
+type FeatureInfo struct {
+	Name string
+}
+
+type Target struct {
+	Info  []TargetInfo
+	Value [][]float32
+}
+
+type FeValue struct {
+	Info  []FeatureInfo
+	Value [][]float32
+}
+
 type AnalyzeData struct {
 	Name string
 	Data []float32

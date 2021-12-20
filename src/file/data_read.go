@@ -1,32 +1,15 @@
-package analyze
+package file
 
 import (
 	"errors"
 	"io/ioutil"
 	"encoding/json"
+
+	"frontier/analyze"
 )
 
-type TargetInfo struct {
-	Name string
-	Up   bool
-}
-
-type FeatureInfo struct {
-	Name string
-}
-
-type Target struct {
-	Info  []TargetInfo
-	Value [][]float32
-}
-
-type FeValue struct {
-	Info  []FeatureInfo
-	Value [][]float32
-}
-
-func TargetRead( file_name string ) ( Target, error ){
-	var target Target
+func TargetRead( file_name string ) ( analyze.Target, error ){
+	var target analyze.Target
 
 	raw, err := ioutil.ReadFile( file_name )
 
@@ -48,8 +31,8 @@ func TargetRead( file_name string ) ( Target, error ){
 	return target, nil
 }
 
-func FeValueRead( file_name string ) ( FeValue, error ){
-	var fevalue FeValue
+func FeValueRead( file_name string ) ( analyze.FeValue, error ){
+	var fevalue analyze.FeValue
 
 	raw, err := ioutil.ReadFile( file_name )
 
