@@ -86,4 +86,3 @@ func ThreeCluc( valueList []float32, name string ) ( float32, error ) {
 
 	return 0, errors.New( "not mutch calc" )
 }
-

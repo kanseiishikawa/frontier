@@ -13,7 +13,7 @@ func main() {
 	t := flag.String( "target", "target.json", "target json file" )	
 	f := flag.String( "fevalue", "fevalue.json", "fevalue json file" )
 	flag.Parse()
-	
+
 	//設定ファイルの読み込み
 	confData, err := config.ConfigRead()
 	fmt.Println( "config read finish" )
@@ -88,11 +88,19 @@ func main() {
 	os.Mkdir( "score_results", 0777 )
 	
 	for _, score := range scores {
-		err = analyze.DataWrite( score )
+		err = analyze.RDataWrite( score )
+		
 		if err != nil {
 			fmt.Println( err )
 			os.Exit( 1 )
 		}
+
+		err = analyze.DiffDataWrite( score )
+		
+		if err != nil {
+			fmt.Println( err )
+			os.Exit( 1 )
+		}		
 	}
 
 
