@@ -11,8 +11,8 @@ import (
 )
 
 func main() {
-	t := flag.String( "target", "target.json", "target json file" )	
-	f := flag.String( "fevalue", "fevalue.json", "fevalue json file" )
+	t := flag.String( "target", "data/target.json", "target json file" )	
+	f := flag.String( "fevalue", "data/fevalue.json", "fevalue json file" )
 	flag.Parse()
 
 	//設定ファイルの読み込み
